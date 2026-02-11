@@ -21,8 +21,7 @@ const FAKE_NAMES = [
 
 function generateFeedItem() {
   const name = FAKE_NAMES[Math.floor(Math.random() * FAKE_NAMES.length)];
-  const prize =
-    CONFIG.prizes[Math.floor(Math.random() * CONFIG.prizes.length)];
+  const prize = CONFIG.prizes[Math.floor(Math.random() * CONFIG.prizes.length)];
   return { name, prize: prize.name, icon: prize.icon };
 }
 

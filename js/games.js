@@ -236,8 +236,7 @@ function spinRoulette(winIndex) {
 
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      strip.style.transition =
-        "transform 4s cubic-bezier(0.15, 0.85, 0.25, 1)";
+      strip.style.transition = "transform 4s cubic-bezier(0.15, 0.85, 0.25, 1)";
       strip.style.transform = `translateX(-${targetOffset}px)`;
     });
   });

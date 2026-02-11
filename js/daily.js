@@ -33,10 +33,7 @@ function dailyCheckIn() {
   state.dailyChecks.push(todayIdx);
   state.dailyStreak++;
 
-  if (
-    state.dailyStreak >= CONFIG.dailyRequired &&
-    !state.dailyRewardClaimed
-  ) {
+  if (state.dailyStreak >= CONFIG.dailyRequired && !state.dailyRewardClaimed) {
     state.dailyRewardClaimed = true;
     state.tickets++;
     document.getElementById("ticket-count").textContent = state.tickets;
