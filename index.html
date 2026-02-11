@@ -1,0 +1,1857 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donatov × PUBG Mobile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* ═══════════════════════════════════════════
+   FONTS — self-hosted woff2
+   ═══════════════════════════════════════════ */
+      @font-face {
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: swap;
+        src: url(fonts/montserrat-regular-cyrillic.woff2) format("woff2");
+        unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+      @font-face {
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: swap;
+        src: url(fonts/montserrat-regular-cyrillic-ext.woff2) format("woff2");
+        unicode-range:
+          U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F,
+          U+FE2E-FE2F;
+      }
+      @font-face {
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: swap;
+        src: url(fonts/montserrat-regular-latin.woff2) format("woff2");
+        unicode-range:
+          U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+          U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+          U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+
+      @font-face {
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: swap;
+        src: url(fonts/inter-cyrillic.woff2) format("woff2");
+        unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+      @font-face {
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: swap;
+        src: url(fonts/inter-latin.woff2) format("woff2");
+        unicode-range:
+          U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+          U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+          U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+
+      /* ═══════════════════════════════════════════
+   DESIGN TOKENS
+   ═══════════════════════════════════════════ */
+      :root {
+        --font-headings: "Montserrat", system-ui, sans-serif;
+        --font-body: "Inter", system-ui, sans-serif;
+        --radius: 12px;
+        --transition: 0.25s ease;
+      }
+
+      [data-theme="light"] {
+        --bg: #f5f6f8;
+        --surface: #ffffff;
+        --text: #1a1a1a;
+        --muted: #6b7280;
+        --primary: #22c55e;
+        --primary-hover: #16a34a;
+        --secondary: #3b82f6;
+        --border: #e5e7eb;
+        --success: #22c55e;
+        --danger: #ef4444;
+        --surface-alt: #f0fdf4;
+        --card-shadow:
+          0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+        --card-shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      [data-theme="dark"] {
+        --bg: #0f1117;
+        --surface: #1a1d27;
+        --text: #e5e7eb;
+        --muted: #9ca3af;
+        --primary: #22c55e;
+        --primary-hover: #16a34a;
+        --secondary: #60a5fa;
+        --border: #2d3140;
+        --success: #22c55e;
+        --danger: #ef4444;
+        --surface-alt: #162217;
+        --card-shadow:
+          0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+        --card-shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.4);
+      }
+
+      /* ═══════════════════════════════════════════
+   BASE
+   ═══════════════════════════════════════════ */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: var(--font-body);
+        background: var(--bg);
+        color: var(--text);
+        transition:
+          background var(--transition),
+          color var(--transition);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: var(--font-headings);
+        font-weight: 700;
+        line-height: 1.2;
+      }
+      a {
+        color: var(--primary);
+        text-decoration: none;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* ═══════════════════════════════════════════
+   UTILITY CLASSES
+   ═══════════════════════════════════════════ */
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--card-shadow);
+        transition: all var(--transition);
+      }
+      .card:hover {
+        box-shadow: var(--card-shadow-lg);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-family: var(--font-body);
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        border: none;
+        transition: all var(--transition);
+      }
+      .btn-primary {
+        background: var(--primary);
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background: var(--primary-hover);
+        transform: translateY(-1px);
+      }
+      .btn-primary:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+      }
+      .btn-outline {
+        background: transparent;
+        color: var(--text);
+        border: 1px solid var(--border);
+      }
+      .btn-outline:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+      .btn-danger {
+        background: var(--danger);
+        color: #fff;
+      }
+      .btn-danger:hover {
+        opacity: 0.9;
+      }
+      .btn-sm {
+        padding: 6px 14px;
+        font-size: 13px;
+      }
+      .btn-xs {
+        padding: 4px 10px;
+        font-size: 12px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .badge-green {
+        background: var(--surface-alt);
+        color: var(--primary);
+      }
+      .badge-red {
+        background: #fef2f2;
+        color: var(--danger);
+      }
+      [data-theme="dark"] .badge-red {
+        background: #2d1515;
+      }
+
+      .section-title {
+        font-size: 24px;
+        margin-bottom: 24px;
+      }
+      .section-subtitle {
+        color: var(--muted);
+        font-size: 14px;
+        margin-top: -18px;
+        margin-bottom: 24px;
+      }
+
+      /* ═══════════════════════════════════════════
+   HEADER
+   ═══════════════════════════════════════════ */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+      }
+      .header-logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--font-headings);
+        font-weight: 700;
+        font-size: 16px;
+        color: var(--text);
+      }
+      .header-logo svg {
+        color: var(--primary);
+      }
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .header-user {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+      }
+      .header-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: var(--primary);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 14px;
+      }
+      .ticket-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: var(--surface-alt);
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--primary);
+      }
+
+      /* Theme toggle */
+      .theme-toggle {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--muted);
+        transition: all var(--transition);
+      }
+      .theme-toggle:hover {
+        color: var(--primary);
+        border-color: var(--primary);
+      }
+
+      /* ═══════════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════════ */
+      .hero {
+        padding: 48px 0;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+      }
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        border-radius: 20px;
+        background: var(--surface-alt);
+        color: var(--primary);
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 16px;
+      }
+      .hero h1 {
+        font-size: 36px;
+        margin-bottom: 16px;
+        line-height: 1.15;
+      }
+      .hero p {
+        color: var(--muted);
+        font-size: 15px;
+        margin-bottom: 20px;
+        max-width: 440px;
+      }
+      .hero-dates {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 16px;
+        border-radius: 8px;
+        border: 1px solid var(--primary);
+        color: var(--primary);
+        font-size: 13px;
+        font-weight: 500;
+      }
+      .hero-banner {
+        border-radius: 16px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #1a2332, #0f2b1e);
+        padding: 32px;
+        position: relative;
+        min-height: 260px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .hero-banner h2 {
+        color: #fff;
+        font-size: 28px;
+        margin-bottom: 8px;
+        position: relative;
+        z-index: 1;
+      }
+      .hero-banner p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 14px;
+        position: relative;
+        z-index: 1;
+      }
+      .hero-banner-glow {
+        position: absolute;
+        top: -20%;
+        right: -10%;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: var(--primary);
+        opacity: 0.15;
+        filter: blur(60px);
+      }
+      .hero-banner::before {
+        content: "";
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+        border: 2px solid rgba(255, 255, 255, 0.15);
+      }
+
+      @media (max-width: 768px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+          gap: 24px;
+        }
+        .hero-grid .hero-banner {
+          order: -1;
+        }
+        .hero h1 {
+          font-size: 28px;
+        }
+      }
+
+      /* ═══════════════════════════════════════════
+   STEPS
+   ═══════════════════════════════════════════ */
+      .steps-section {
+        padding: 48px 0;
+      }
+      .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+      .step-card {
+        padding: 24px;
+        position: relative;
+      }
+      .step-num {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: var(--primary);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+      .step-card h3 {
+        font-size: 15px;
+        margin-bottom: 6px;
+      }
+      .step-card p {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      @media (max-width: 768px) {
+        .steps-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+        }
+      }
+      @media (max-width: 480px) {
+        .steps-grid {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+      }
+
+      /* ═══════════════════════════════════════════
+   INTERACTIVE SECTION
+   ═══════════════════════════════════════════ */
+      .interactive-section {
+        padding: 48px 0;
+      }
+      .interactive-layout {
+        display: grid;
+        grid-template-columns: 1fr 360px;
+        gap: 24px;
+        align-items: start;
+      }
+      @media (max-width: 900px) {
+        .interactive-layout {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Tab buttons */
+      .tab-bar {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+      .tab-btn {
+        padding: 8px 18px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--muted);
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        font-family: var(--font-body);
+        transition: all var(--transition);
+      }
+      .tab-btn.active {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+      }
+      .tab-btn:hover:not(.active) {
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+
+      /* Interactive panel */
+      .interact-panel {
+        padding: 24px;
+      }
+
+      /* Prize grid inside interactive */
+      .prize-grid {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
+      .prize-item {
+        flex: 1;
+        min-width: 100px;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        text-align: center;
+        background: var(--bg);
+        transition: all var(--transition);
+      }
+      .prize-item:hover {
+        border-color: var(--primary);
+      }
+      .prize-icon {
+        font-size: 24px;
+        margin-bottom: 6px;
+      }
+      .prize-name {
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
+      .prize-qty {
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      /* Interactive controls */
+      .interact-controls {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .interact-controls .ticket-cost {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      /* ═══════════════════════════════════════════
+   WHEEL
+   ═══════════════════════════════════════════ */
+      .wheel-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 20px 0;
+      }
+      .wheel-container {
+        position: relative;
+        width: 280px;
+        height: 280px;
+      }
+      .wheel-canvas {
+        width: 280px;
+        height: 280px;
+      }
+      .wheel-pointer {
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+        border-top: 20px solid var(--primary);
+        z-index: 2;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+      }
+      .wheel-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: var(--surface);
+        border: 3px solid var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 11px;
+        color: var(--primary);
+        z-index: 2;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      /* ═══════════════════════════════════════════
+   ROULETTE
+   ═══════════════════════════════════════════ */
+      .roulette-wrapper {
+        padding: 20px 0;
+      }
+      .roulette-viewport {
+        position: relative;
+        overflow: hidden;
+        border-radius: 12px;
+        border: 2px solid var(--border);
+        height: 100px;
+        margin-bottom: 20px;
+      }
+      .roulette-center-line {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 3px;
+        height: 100%;
+        background: var(--primary);
+        z-index: 3;
+        box-shadow: 0 0 12px rgba(34, 197, 94, 0.5);
+      }
+      .roulette-center-glow {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 100%;
+        z-index: 2;
+        pointer-events: none;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(34, 197, 94, 0.12),
+          transparent
+        );
+      }
+      .roulette-strip {
+        display: flex;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        transition: none;
+        will-change: transform;
+      }
+      .roulette-item {
+        width: 100px;
+        height: 100px;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        border-right: 1px solid var(--border);
+        font-size: 12px;
+        font-weight: 600;
+        background: var(--bg);
+      }
+      .roulette-item .r-icon {
+        font-size: 28px;
+      }
+      .roulette-item.winner {
+        background: var(--surface-alt);
+        border-color: var(--primary);
+      }
+
+      /* ═══════════════════════════════════════════
+   CARDS
+   ═══════════════════════════════════════════ */
+      .cards-wrapper {
+        padding: 20px 0;
+      }
+      .cards-grid {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        margin-bottom: 20px;
+        perspective: 800px;
+        flex-wrap: wrap;
+      }
+      .flip-card {
+        width: 120px;
+        height: 160px;
+        cursor: pointer;
+        perspective: 600px;
+      }
+      .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+      }
+      .flip-card.flipped .flip-card-inner {
+        transform: rotateY(180deg);
+      }
+      .flip-card-front,
+      .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 12px;
+        backface-visibility: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--border);
+      }
+      .flip-card-front {
+        background: var(--bg);
+        gap: 8px;
+      }
+      .flip-card-front .card-icon {
+        font-size: 32px;
+      }
+      .flip-card-front .card-label {
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .flip-card-back {
+        background: linear-gradient(135deg, var(--primary), #16a34a);
+        transform: rotateY(180deg);
+        color: #fff;
+        font-size: 28px;
+      }
+      .flip-card-back::after {
+        content: "?";
+        font-family: var(--font-headings);
+        font-weight: 700;
+        font-size: 36px;
+      }
+      .flip-card.chosen {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.3);
+      }
+      .flip-card.shuffling .flip-card-inner {
+        animation: cardShuffle 0.6s ease;
+      }
+      @keyframes cardShuffle {
+        0% {
+          transform: translateX(0) rotateY(180deg);
+        }
+        25% {
+          transform: translateX(-20px) rotateY(180deg);
+        }
+        50% {
+          transform: translateX(20px) rotateY(180deg);
+        }
+        75% {
+          transform: translateX(-10px) rotateY(180deg);
+        }
+        100% {
+          transform: translateX(0) rotateY(180deg);
+        }
+      }
+      .flip-card.reveal .flip-card-inner {
+        transform: rotateY(0);
+      }
+
+      /* ═══════════════════════════════════════════
+   SIDEBAR – TASKS
+   ═══════════════════════════════════════════ */
+      .sidebar-panel {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .task-card {
+        padding: 20px;
+      }
+      .task-card h3 {
+        font-size: 16px;
+        margin-bottom: 4px;
+      }
+      .task-card .task-sub {
+        color: var(--muted);
+        font-size: 13px;
+        margin-bottom: 16px;
+      }
+      .task-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .task-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 12px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        gap: 10px;
+      }
+      .task-info {
+        flex: 1;
+        min-width: 0;
+      }
+      .task-info h4 {
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .task-info p {
+        font-size: 12px;
+        color: var(--muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .task-reward {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--primary);
+        white-space: nowrap;
+      }
+      .task-btn {
+        padding: 5px 14px;
+        border-radius: 6px;
+        border: 1px solid var(--primary);
+        background: transparent;
+        color: var(--primary);
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 600;
+        font-family: var(--font-body);
+        transition: all var(--transition);
+        white-space: nowrap;
+      }
+      .task-btn:hover {
+        background: var(--primary);
+        color: #fff;
+      }
+      .task-btn.done {
+        background: var(--surface-alt);
+        border-color: var(--surface-alt);
+        cursor: default;
+        opacity: 0.7;
+      }
+      .task-progress {
+        font-size: 13px;
+        color: var(--muted);
+        text-align: right;
+      }
+
+      /* ═══════════════════════════════════════════
+   DAILY CHECK-IN
+   ═══════════════════════════════════════════ */
+      .daily-section {
+        padding: 48px 0;
+      }
+      .daily-card {
+        padding: 24px;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      .daily-card h3 {
+        font-size: 18px;
+        margin-bottom: 4px;
+      }
+      .daily-card > p {
+        color: var(--muted);
+        font-size: 13px;
+        margin-bottom: 20px;
+      }
+      .daily-dots {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+      }
+      .daily-dot {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 2px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--muted);
+        transition: all var(--transition);
+      }
+      .daily-dot.checked {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: #fff;
+      }
+      .daily-dot.today {
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+      .daily-streak {
+        padding: 12px 16px;
+        border-radius: 8px;
+        background: var(--bg);
+        font-size: 13px;
+        color: var(--muted);
+        margin-bottom: 16px;
+      }
+      .daily-streak span {
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      /* ═══════════════════════════════════════════
+   MY PRIZES
+   ═══════════════════════════════════════════ */
+      .prizes-section {
+        padding: 48px 0;
+      }
+      .prizes-card {
+        padding: 24px;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      .prizes-card h3 {
+        font-size: 18px;
+        margin-bottom: 4px;
+      }
+      .prizes-card > p.sub {
+        color: var(--muted);
+        font-size: 13px;
+        margin-bottom: 16px;
+      }
+      .prize-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .prize-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 14px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+      }
+      .prize-row-icon {
+        font-size: 22px;
+      }
+      .prize-row-info {
+        flex: 1;
+      }
+      .prize-row-info h4 {
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .prize-row-info p {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .prize-row-count {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 10px;
+        border-radius: 6px;
+        background: var(--danger);
+        color: #fff;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .prizes-note {
+        margin-top: 14px;
+        padding: 10px 14px;
+        border-radius: 8px;
+        background: var(--bg);
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      /* ═══════════════════════════════════════════
+   LIVE FEED
+   ═══════════════════════════════════════════ */
+      .feed-section {
+        padding: 48px 0;
+      }
+      .feed-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+      .feed-header h2 {
+        margin-bottom: 0;
+      }
+      .feed-header .feed-count {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .feed-card {
+        padding: 0;
+        overflow: hidden;
+      }
+      .feed-list {
+        max-height: 400px;
+        overflow-y: auto;
+      }
+      .feed-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 20px;
+        border-bottom: 1px solid var(--border);
+        font-size: 14px;
+        animation: feedSlideIn 0.4s ease;
+      }
+      .feed-item:last-child {
+        border-bottom: none;
+      }
+      .feed-item .feed-user {
+        font-weight: 600;
+        min-width: 80px;
+      }
+      .feed-item .feed-text {
+        color: var(--muted);
+      }
+      .feed-item .feed-prize {
+        font-weight: 600;
+        color: var(--primary);
+        margin-left: auto;
+        white-space: nowrap;
+      }
+      @keyframes feedSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ═══════════════════════════════════════════
+   ALL PRIZES ACCORDION
+   ═══════════════════════════════════════════ */
+      .accordion-section {
+        padding: 48px 0;
+      }
+      .accordion {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .accordion-item {
+        margin-bottom: 8px;
+        overflow: hidden;
+      }
+      .accordion-item .card {
+        overflow: hidden;
+      }
+      .accordion-btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 20px;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        text-align: left;
+        font-family: var(--font-headings);
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .accordion-btn svg {
+        transition: transform 0.3s ease;
+        flex-shrink: 0;
+      }
+      .accordion-item.open .accordion-btn svg {
+        transform: rotate(180deg);
+      }
+      .accordion-body {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+      .accordion-item.open .accordion-body {
+        max-height: 600px;
+      }
+      .accordion-body-inner {
+        padding: 0 20px 16px;
+      }
+      .acc-prize-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--border);
+        font-size: 14px;
+      }
+      .acc-prize-row:last-child {
+        border-bottom: none;
+      }
+      .acc-prize-row .ap-icon {
+        font-size: 20px;
+      }
+      .acc-prize-row .ap-name {
+        flex: 1;
+        font-weight: 500;
+      }
+      .acc-prize-row .ap-qty {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      /* ═══════════════════════════════════════════
+   STATS BLOCK (Ended mode)
+   ═══════════════════════════════════════════ */
+      .stats-block {
+        padding: 24px;
+        max-width: 700px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .stats-block h3 {
+        font-size: 18px;
+        margin-bottom: 16px;
+      }
+      .stats-nums {
+        display: flex;
+        gap: 32px;
+        justify-content: center;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+      .stat-item {
+        text-align: center;
+      }
+      .stat-item .stat-val {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--primary);
+      }
+      .stat-item .stat-label {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      /* ═══════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════ */
+      .site-footer {
+        border-top: 1px solid var(--border);
+        padding: 32px 0;
+        margin-top: 48px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .footer-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .footer-links {
+        display: flex;
+        gap: 16px;
+      }
+      .footer-links a {
+        color: var(--muted);
+        transition: color var(--transition);
+      }
+      .footer-links a:hover {
+        color: var(--primary);
+      }
+
+      /* ═══════════════════════════════════════════
+   MODAL
+   ═══════════════════════════════════════════ */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
+      }
+      .modal-overlay.active {
+        display: flex;
+      }
+      .modal-box {
+        background: var(--surface);
+        border-radius: 16px;
+        padding: 32px;
+        max-width: 400px;
+        width: 90%;
+        text-align: center;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        animation: modalIn 0.3s ease;
+      }
+      @keyframes modalIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9) translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+      .modal-icon {
+        font-size: 48px;
+        margin-bottom: 12px;
+      }
+      .modal-box h3 {
+        font-size: 20px;
+        margin-bottom: 8px;
+      }
+      .modal-box p {
+        color: var(--muted);
+        font-size: 14px;
+        margin-bottom: 20px;
+      }
+
+      /* ═══════════════════════════════════════════
+   DISABLED / EVENT STATES
+   ═══════════════════════════════════════════ */
+      .disabled-overlay {
+        position: relative;
+      }
+      .disabled-overlay::after {
+        content: attr(data-disabled-msg);
+        position: absolute;
+        inset: 0;
+        background: rgba(var(--bg-rgb, 0.95));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--muted);
+        border-radius: var(--radius);
+        backdrop-filter: blur(2px);
+        z-index: 5;
+      }
+      [data-theme="light"] .disabled-overlay::after {
+        background: rgba(245, 246, 248, 0.92);
+      }
+      [data-theme="dark"] .disabled-overlay::after {
+        background: rgba(15, 17, 23, 0.92);
+      }
+
+      /* Loading */
+      .loading-spinner {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 2px solid var(--border);
+        border-top-color: var(--primary);
+        animation: spin 0.6s linear infinite;
+        display: inline-block;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* ═══════════════════════════════════════════
+   SCROLLBAR
+   ═══════════════════════════════════════════ */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--muted);
+      }
+
+      /* ═══════════════════════════════════════════
+   EVENT MODE BANNER
+   ═══════════════════════════════════════════ */
+      .event-banner {
+        padding: 12px 20px;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 14px;
+        margin-bottom: 24px;
+      }
+      .event-banner.soon {
+        background: #fef3c7;
+        color: #92400e;
+      }
+      [data-theme="dark"] .event-banner.soon {
+        background: #422006;
+        color: #fbbf24;
+      }
+      .event-banner.ended {
+        background: #fef2f2;
+        color: #991b1b;
+      }
+      [data-theme="dark"] .event-banner.ended {
+        background: #2d1515;
+        color: #fca5a5;
+      }
+
+      /* Guest CTA */
+      .guest-cta {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 20px;
+        border-radius: 10px;
+        background: var(--surface-alt);
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ============== HEADER ============== -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="header-logo">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M8 12l3 3 5-5" />
+          </svg>
+          <span>Donatov × PUBG Mobile</span>
+        </div>
+        <div class="header-right">
+          <button
+            class="theme-toggle"
+            onclick="toggleTheme()"
+            aria-label="Сменить тему"
+            title="Сменить тему"
+          >
+            <svg
+              class="icon-sun"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <circle cx="12" cy="12" r="5" />
+              <line x1="12" y1="1" x2="12" y2="3" />
+              <line x1="12" y1="21" x2="12" y2="23" />
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+              <line x1="1" y1="12" x2="3" y2="12" />
+              <line x1="21" y1="12" x2="23" y2="12" />
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            </svg>
+            <svg
+              class="icon-moon"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              style="display: none"
+            >
+              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+            </svg>
+          </button>
+          <!-- Guest -->
+          <div id="guest-header">
+            <button class="btn btn-primary btn-sm" onclick="loginTelegram()">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.53 8.15l-1.8 8.47c-.13.6-.5.75-.99.47l-2.76-2.03-1.33 1.28c-.15.15-.27.27-.56.27l.2-2.82 5.13-4.63c.22-.2-.05-.31-.35-.12l-6.34 3.99-2.73-.85c-.59-.19-.61-.59.12-.88l10.68-4.12c.5-.18.93.12.77.87z"
+                />
+              </svg>
+              Войти через Telegram
+            </button>
+          </div>
+          <!-- Auth -->
+          <div id="auth-header" style="display: none">
+            <div class="header-user">
+              <div class="header-avatar" id="user-avatar">U</div>
+              <span id="user-name">Username</span>
+              <div class="ticket-badge">
+                <span>🎟</span>
+                <span id="ticket-count">0</span>
+              </div>
+              <button class="btn btn-outline btn-xs" onclick="logoutUser()">
+                Выйти
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============== HERO ============== -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-text">
+            <div class="hero-badge"><span>🎮</span> Ивент × PUBG Mobile</div>
+            <h1>Donatov × PUBG Mobile</h1>
+            <p>
+              Выполняй задания, получай билетики и участвуй в лотерее. Призы
+              автоматически попадут в твой инвентарь на donatov.net.
+            </p>
+            <div class="hero-dates">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="3" y="4" width="18" height="18" rx="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+              </svg>
+              Сроки: 10 февраля 2026 г. — 10 марта 2026 г.
+            </div>
+          </div>
+          <div class="hero-banner">
+            <div class="hero-banner-glow"></div>
+            <h2>PUBG Mobile</h2>
+            <p>Эксклюзивные призы для каждого участника</p>
+            <p
+              style="
+                margin-top: 12px;
+                font-size: 12px;
+                color: rgba(255, 255, 255, 0.5);
+              "
+            >
+              UDP-ME · промоивент donatov
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== EVENT BANNER ============== -->
+    <div class="container">
+      <div id="event-banner" class="event-banner" style="display: none"></div>
+    </div>
+
+    <!-- ============== HOW IT WORKS ============== -->
+    <section class="steps-section">
+      <div class="container">
+        <h2 class="section-title">Как это работает</h2>
+        <div class="steps-grid">
+          <div class="card step-card">
+            <div class="step-num">1</div>
+            <h3>Авторизуйся</h3>
+            <p>
+              Вход через Telegram. Можно разлогиниться и зайти с другого
+              аккаунта.
+            </p>
+          </div>
+          <div class="card step-card">
+            <div class="step-num">2</div>
+            <h3>Выполняй задания</h3>
+            <p>
+              Выполняй задания и отмечайся по дням. Пропуск не обнулит прогресс.
+            </p>
+          </div>
+          <div class="card step-card">
+            <div class="step-num">3</div>
+            <h3>Получай билетики</h3>
+            <p>Трать полученные билетики в конкурсе на призы.</p>
+          </div>
+          <div class="card step-card">
+            <div class="step-num">4</div>
+            <h3>Участвуй в лотерее</h3>
+            <p>
+              Трати билетики на попытку. Пустышек нет — всегда выигрывает приз.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== INTERACTIVE + TASKS ============== -->
+    <section class="interactive-section" id="interactive-section">
+      <div class="container">
+        <div class="interactive-layout">
+          <!-- LEFT: Interactive -->
+          <div>
+            <div class="card interact-panel" id="interact-panel">
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  margin-bottom: 16px;
+                  flex-wrap: wrap;
+                  gap: 10px;
+                "
+              >
+                <h3 style="font-size: 18px">Лотерея</h3>
+                <div class="tab-bar" id="tab-bar">
+                  <button class="tab-btn active" data-tab="wheel">Wheel</button>
+                  <button class="tab-btn" data-tab="roulette">Roulette</button>
+                  <button class="tab-btn" data-tab="cards">Cards</button>
+                </div>
+              </div>
+
+              <!-- Prize display -->
+              <div class="prize-grid" id="prize-display">
+                <div class="prize-item">
+                  <div class="prize-icon">🎮</div>
+                  <div class="prize-name">UC 60</div>
+                  <div class="prize-qty">×1</div>
+                </div>
+                <div class="prize-item">
+                  <div class="prize-icon">💎</div>
+                  <div class="prize-name">UC 180</div>
+                  <div class="prize-qty">×1</div>
+                </div>
+                <div class="prize-item">
+                  <div class="prize-icon">💎</div>
+                  <div class="prize-name">UC 600</div>
+                  <div class="prize-qty">×1</div>
+                </div>
+                <div class="prize-item">
+                  <div class="prize-icon">🃏</div>
+                  <div class="prize-name">Royale Pass</div>
+                  <div class="prize-qty">×1</div>
+                </div>
+                <div class="prize-item">
+                  <div class="prize-icon">🎨</div>
+                  <div class="prize-name">Скин (рандом)</div>
+                  <div class="prize-qty">×1</div>
+                </div>
+                <div class="prize-item">
+                  <div class="prize-icon">📦</div>
+                  <div class="prize-name">Лутбокс</div>
+                  <div class="prize-qty">×1</div>
+                </div>
+              </div>
+
+              <!-- Game areas -->
+              <div id="game-area">
+                <!-- Wheel -->
+                <div id="game-wheel" class="wheel-wrapper">
+                  <div class="wheel-container">
+                    <div class="wheel-pointer"></div>
+                    <canvas
+                      id="wheelCanvas"
+                      class="wheel-canvas"
+                      width="280"
+                      height="280"
+                    ></canvas>
+                    <div class="wheel-center" onclick="spinWheel()">SPIN</div>
+                  </div>
+                </div>
+                <!-- Roulette -->
+                <div
+                  id="game-roulette"
+                  class="roulette-wrapper"
+                  style="display: none"
+                >
+                  <div class="roulette-viewport">
+                    <div class="roulette-center-line"></div>
+                    <div class="roulette-center-glow"></div>
+                    <div class="roulette-strip" id="roulette-strip"></div>
+                  </div>
+                </div>
+                <!-- Cards -->
+                <div
+                  id="game-cards"
+                  class="cards-wrapper"
+                  style="display: none"
+                >
+                  <div class="cards-grid" id="cards-grid"></div>
+                </div>
+              </div>
+
+              <!-- Controls -->
+              <div class="interact-controls">
+                <div class="ticket-cost">
+                  🎟 Цена: <strong>1 билетик</strong>
+                </div>
+                <button class="btn btn-primary" id="play-btn" onclick="play()">
+                  Использовать билет
+                </button>
+                <span
+                  id="interact-hint"
+                  style="font-size: 13px; color: var(--muted); display: none"
+                ></span>
+              </div>
+              <!-- Guest CTA -->
+              <div
+                class="guest-cta"
+                id="guest-cta"
+                style="display: none; margin-top: 16px"
+              >
+                <span>🔒</span>
+                <span>Войдите через Telegram, чтобы участвовать</span>
+                <button
+                  class="btn btn-primary btn-sm"
+                  onclick="loginTelegram()"
+                  style="margin-left: auto"
+                >
+                  Войти
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: Tasks sidebar -->
+          <div class="sidebar-panel" id="tasks-sidebar">
+            <div class="card task-card" id="tasks-card">
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  margin-bottom: 4px;
+                "
+              >
+                <h3>Задания</h3>
+                <span class="task-progress" id="task-progress">0/4</span>
+              </div>
+              <p class="task-sub">Выполняй и получай билетики.</p>
+              <div class="task-list" id="task-list"></div>
+            </div>
+
+            <!-- Daily Section inline on sidebar -->
+            <div class="card" style="padding: 20px" id="daily-card">
+              <h3 style="font-size: 16px; margin-bottom: 4px">
+                Ежедневная отметка
+              </h3>
+              <p
+                style="
+                  color: var(--muted);
+                  font-size: 13px;
+                  margin-bottom: 16px;
+                "
+              >
+                Нужно 3 дня подряд, чтобы получить +1 билетик (1 раз за ивент).
+              </p>
+              <div class="daily-dots" id="daily-dots"></div>
+              <div class="daily-streak" id="daily-streak">
+                Сегодня можно отметиться. Текущая серия:
+                <span id="streak-count">0</span> дн(ей). Пропуск не обнулит
+                прогресс, но день просто не засчитывается.
+              </div>
+              <button
+                class="btn btn-primary btn-sm"
+                id="daily-btn"
+                onclick="dailyCheckIn()"
+              >
+                Отметиться
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== MY PRIZES ============== -->
+    <section class="prizes-section" id="prizes-section">
+      <div class="container">
+        <div class="card prizes-card">
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              margin-bottom: 4px;
+            "
+          >
+            <h3>Мои призы</h3>
+            <button
+              class="btn btn-outline btn-xs"
+              onclick="togglePrizesVisibility()"
+              id="prizes-toggle-btn"
+            >
+              Скрыть
+            </button>
+          </div>
+          <p class="sub">Уже в инвентаре donatov.net:</p>
+          <div class="prize-list" id="my-prizes-list">
+            <p style="color: var(--muted); font-size: 14px" id="no-prizes">
+              Пока нет призов. Испытай удачу!
+            </p>
+          </div>
+          <div class="prizes-note">
+            Полученные призы автоматически добавляются в твой профиль на
+            donatov.net.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== LIVE FEED ============== -->
+    <section class="feed-section" id="feed-section">
+      <div class="container">
+        <div class="feed-header">
+          <h2 class="section-title" style="margin-bottom: 0">
+            Лайв-лента выигрышей
+          </h2>
+          <span class="feed-count"
+            >Обновляется автоматически ·
+            <span id="feed-total">Показано: 0</span></span
+          >
+        </div>
+        <div class="card feed-card">
+          <div class="feed-list" id="feed-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== STATS (Ended mode) ============== -->
+    <section id="stats-section" style="display: none; padding: 48px 0">
+      <div class="container">
+        <div class="card stats-block">
+          <h3>📊 Статистика ивента</h3>
+          <div class="stats-nums">
+            <div class="stat-item">
+              <div class="stat-val" id="stat-participants">1 247</div>
+              <div class="stat-label">Участников</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-val" id="stat-prizes-given">3 891</div>
+              <div class="stat-label">Призов выдано</div>
+            </div>
+          </div>
+          <div style="text-align: left; max-width: 400px; margin: 0 auto">
+            <h4 style="font-size: 15px; margin-bottom: 10px">Список призов:</h4>
+            <div
+              id="stats-prize-list"
+              style="font-size: 14px; color: var(--muted); line-height: 1.8"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== ALL PRIZES ACCORDION ============== -->
+    <section class="accordion-section">
+      <div class="container">
+        <h2 class="section-title">Все призы</h2>
+        <div class="accordion" id="accordion"></div>
+      </div>
+    </section>
+
+    <!-- ============== FOOTER ============== -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span>© 2026 Donatov. Все права защищены.</span>
+        <div class="footer-links">
+          <a href="#">Правила</a>
+          <a href="#">Поддержка</a>
+          <a href="https://donatov.net" target="_blank">donatov.net</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ============== MODAL ============== -->
+    <div class="modal-overlay" id="modal">
+      <div class="modal-box">
+        <div class="modal-icon" id="modal-icon">🎉</div>
+        <h3 id="modal-title">Поздравляем!</h3>
+        <p id="modal-text">Вы выиграли приз</p>
+        <button class="btn btn-primary" onclick="closeModal()">Закрыть</button>
+      </div>
+    </div>
+
+    <!-- JS modules (order matters: config → state → utilities → features → init) -->
+    <script src="js/config.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/games.js"></script>
+    <script src="js/tasks.js"></script>
+    <script src="js/daily.js"></script>
+    <script src="js/prizes.js"></script>
+    <script src="js/feed.js"></script>
+    <script src="js/accordion.js"></script>
+    <script src="js/event.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
