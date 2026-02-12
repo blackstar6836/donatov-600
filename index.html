@@ -219,39 +219,8 @@
                 </div>
               </div>
 
-              <!-- Prize display -->
-              <div class="prize-grid" id="prize-display">
-                <div class="prize-item">
-                  <div class="prize-icon">🎮</div>
-                  <div class="prize-name">UC 60</div>
-                  <div class="prize-qty">×1</div>
-                </div>
-                <div class="prize-item">
-                  <div class="prize-icon">💎</div>
-                  <div class="prize-name">UC 180</div>
-                  <div class="prize-qty">×1</div>
-                </div>
-                <div class="prize-item">
-                  <div class="prize-icon">💎</div>
-                  <div class="prize-name">UC 600</div>
-                  <div class="prize-qty">×1</div>
-                </div>
-                <div class="prize-item">
-                  <div class="prize-icon">🃏</div>
-                  <div class="prize-name">Royale Pass</div>
-                  <div class="prize-qty">×1</div>
-                </div>
-                <div class="prize-item">
-                  <div class="prize-icon">🎨</div>
-                  <div class="prize-name">Скин (рандом)</div>
-                  <div class="prize-qty">×1</div>
-                </div>
-                <div class="prize-item">
-                  <div class="prize-icon">📦</div>
-                  <div class="prize-name">Лутбокс</div>
-                  <div class="prize-qty">×1</div>
-                </div>
-              </div>
+              <!-- Prize display (rendered from CONFIG.prizes via JS) -->
+              <div class="prize-grid" id="prize-display"></div>
 
               <!-- Game areas -->
               <div id="game-area">
@@ -337,23 +306,13 @@
 
             <!-- Daily Section inline on sidebar -->
             <div class="card" style="padding: 20px" id="daily-card">
-              <h3 style="font-size: 16px; margin-bottom: 4px">
+              <h3 style="font-size: 16px; margin-bottom: 12px">
                 Ежедневная отметка
               </h3>
-              <p
-                style="
-                  color: var(--muted);
-                  font-size: 13px;
-                  margin-bottom: 16px;
-                "
-              >
-                Нужно 3 дня подряд, чтобы получить +1 билетик (1 раз за ивент).
-              </p>
-              <div class="daily-dots" id="daily-dots"></div>
+              <div class="daily-week" id="daily-dots"></div>
               <div class="daily-streak" id="daily-streak">
-                Сегодня можно отметиться. Текущая серия:
-                <span id="streak-count">0</span> дн(ей). Пропуск не обнулит
-                прогресс, но день просто не засчитывается.
+                Отмечено: <span id="daily-checked-count">0</span> / <span id="daily-total-count">7</span>.
+                Каждый день — +1 билетик.
               </div>
               <button
                 class="btn btn-primary btn-sm"
@@ -482,6 +441,7 @@
     <script src="js/state.js"></script>
     <script src="js/theme.js"></script>
     <script src="js/auth.js"></script>
+    <script src="js/prize-display.js"></script>
     <script src="js/games.js"></script>
     <script src="js/tasks.js"></script>
     <script src="js/daily.js"></script>

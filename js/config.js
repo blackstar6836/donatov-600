@@ -10,12 +10,12 @@ const CONFIG = {
   dateStart: "2026-02-10",
   dateEnd: "2026-03-10",
   prizes: [
-    { id: 1, name: "UC 60", icon: "🎮", qty: "x1" },
+    { id: 1, name: "UC 60", icon: "🎮", qty: "x3" },
     { id: 2, name: "UC 180", icon: "💎", qty: "x1" },
-    { id: 3, name: "UC 600", icon: "💎", qty: "x1" },
+    { id: 3, name: "UC 600", icon: "💎", qty: "x5" },
     { id: 4, name: "Royale Pass", icon: "🃏", qty: "x1" },
     { id: 5, name: "Скин (рандом)", icon: "🎨", qty: "x1" },
-    { id: 6, name: "Лутбокс", icon: "📦", qty: "x1" },
+    { id: 6, name: "Лутбокс", icon: "📦", qty: "x6" },
   ],
   tasks: [
     {

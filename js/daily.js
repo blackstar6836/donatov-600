@@ -1,19 +1,38 @@
 // ==========================================
 // DAILY CHECK-IN
 // ==========================================
+const DAY_LABELS = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"];
+
 function renderDaily() {
-  const dots = document.getElementById("daily-dots");
-  dots.innerHTML = "";
+  const container = document.getElementById("daily-dots");
+  container.innerHTML = "";
   for (let i = 0; i < CONFIG.dailyDays; i++) {
-    const dot = document.createElement("div");
-    dot.className = "daily-dot";
-    if (state.dailyChecks.includes(i)) dot.classList.add("checked");
-    if (i === state.dailyChecks.length && !state.dailyChecks.includes(i))
-      dot.classList.add("today");
-    dot.textContent = i + 1;
-    dots.appendChild(dot);
+    const isChecked = state.dailyChecks.includes(i);
+    const isCurrent = i === state.dailyChecks.length && !isChecked;
+
+    const cell = document.createElement("div");
+    cell.className = "daily-cell";
+    if (isChecked) cell.classList.add("checked");
+    if (isCurrent) cell.classList.add("today");
+
+    const label = document.createElement("span");
+    label.className = "daily-label";
+    label.textContent = DAY_LABELS[i] || (i + 1);
+
+    const icon = document.createElement("span");
+    icon.className = "daily-icon";
+    if (isChecked) {
+      icon.textContent = "✅";
+    } else {
+      icon.textContent = "🔒";
+    }
+
+    cell.appendChild(label);
+    cell.appendChild(icon);
+    container.appendChild(cell);
   }
-  document.getElementById("streak-count").textContent = state.dailyStreak;
+  document.getElementById("daily-checked-count").textContent = state.dailyChecks.length;
+  document.getElementById("daily-total-count").textContent = CONFIG.dailyDays;
 
   const btn = document.getElementById("daily-btn");
   const todayIdx = state.dailyChecks.length;
@@ -33,17 +52,14 @@ function dailyCheckIn() {
   state.dailyChecks.push(todayIdx);
   state.dailyStreak++;
 
-  if (state.dailyStreak >= CONFIG.dailyRequired && !state.dailyRewardClaimed) {
-    state.dailyRewardClaimed = true;
-    state.tickets++;
-    document.getElementById("ticket-count").textContent = state.tickets;
-    document.getElementById("modal-icon").textContent = "🎟";
-    document.getElementById("modal-title").textContent = "Бонус!";
-    document.getElementById("modal-text").textContent =
-      `${CONFIG.dailyRequired} дня подряд! +1 билетик`;
-    document.getElementById("modal").classList.add("active");
-    updatePlayButton();
-  }
+  // Каждая отметка = +1 билетик
+  state.tickets++;
+  document.getElementById("ticket-count").textContent = state.tickets;
+  document.getElementById("modal-icon").textContent = "🎟";
+  document.getElementById("modal-title").textContent = "Бонус!";
+  document.getElementById("modal-text").textContent = "Ежедневная отметка: +1 билетик";
+  document.getElementById("modal").classList.add("active");
+  updatePlayButton();
 
   renderDaily();
 }

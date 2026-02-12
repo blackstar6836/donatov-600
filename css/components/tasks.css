@@ -73,6 +73,11 @@
   background: var(--primary);
   color: #fff;
 }
+.task-btn.verify {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
 .task-btn.done {
   background: var(--surface-alt);
   border-color: var(--surface-alt);

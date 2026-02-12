@@ -2,6 +2,7 @@
 // INIT
 // ==========================================
 function init() {
+  renderPrizeDisplay();
   drawWheel();
   buildRoulette();
   buildCards();

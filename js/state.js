@@ -6,6 +6,7 @@ let state = {
   user: null,
   tickets: 0,
   completedTasks: [],
+  visitedTasks: [],
   dailyChecks: [],
   dailyStreak: 0,
   dailyRewardClaimed: false,

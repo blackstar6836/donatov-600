@@ -95,7 +95,7 @@ function drawWheel() {
     lbl.style.transform = `rotate(${i * arc + arc / 2}deg)`;
     lbl.innerHTML =
       `<span class="wh-icon">${CONFIG.prizes[i].icon}</span>` +
-      `<span class="wh-name">${CONFIG.prizes[i].name}</span>`;
+      `<span class="wh-qty">${CONFIG.prizes[i].qty}</span>`;
     disc.appendChild(lbl);
   }
 }
