@@ -61,135 +61,66 @@ function closeModal() {
 }
 
 // ==========================================
-// WHEEL
+// WHEEL (HTML/CSS)
 // ==========================================
 let wheelAngle = 0;
-const WHEEL_COLORS = [
-  "#22c55e",
-  "#16a34a",
-  "#15803d",
-  "#166534",
-  "#14532d",
-  "#052e16",
-];
-const WHEEL_COLORS_ALT = [
-  "#22c55e",
-  "#3b82f6",
-  "#22c55e",
-  "#3b82f6",
-  "#22c55e",
-  "#3b82f6",
-];
+const WHEEL_COLORS = ["#22c55e", "#16a34a"];
 
-function drawWheel(highlightIndex) {
-  const canvas = document.getElementById("wheelCanvas");
-  const ctx = canvas.getContext("2d");
-  const cx = 140,
-    cy = 140,
-    r = 130;
-  const segments = CONFIG.prizes.length;
-  const arc = (2 * Math.PI) / segments;
+function drawWheel() {
+  const disc = document.getElementById("wheelDisc");
+  disc.innerHTML = "";
+  disc.classList.remove("spinning");
+  disc.style.transform = `rotate(${wheelAngle}deg)`;
 
-  ctx.clearRect(0, 0, 280, 280);
+  const n = CONFIG.prizes.length;
+  const arc = 360 / n;
 
-  for (let i = 0; i < segments; i++) {
-    const startA = i * arc - Math.PI / 2;
-    const endA = startA + arc;
+  // Conic-gradient background
+  const stops = CONFIG.prizes.map((_, i) => {
+    const c = WHEEL_COLORS[i % 2];
+    return `${c} ${i * arc}deg ${(i + 1) * arc}deg`;
+  });
+  disc.style.background = `conic-gradient(from ${-90 - arc / 2}deg, ${stops.join(", ")})`;
 
-    ctx.beginPath();
-    ctx.moveTo(cx, cy);
-    ctx.arc(cx, cy, r, startA, endA);
-    ctx.closePath();
-    ctx.fillStyle = i % 2 === 0 ? "#22c55e" : "#16a34a";
-    if (highlightIndex === i) ctx.fillStyle = "#fbbf24";
-    ctx.fill();
-    ctx.strokeStyle = "rgba(255,255,255,.2)";
-    ctx.lineWidth = 1;
-    ctx.stroke();
+  for (let i = 0; i < n; i++) {
+    // Divider line from centre to edge
+    const line = document.createElement("div");
+    line.className = "wh-line";
+    line.style.transform = `rotate(${i * arc}deg)`;
+    disc.appendChild(line);
 
-    // Text
-    ctx.save();
-    ctx.translate(cx, cy);
-    ctx.rotate(startA + arc / 2);
-    ctx.textAlign = "center";
-    ctx.fillStyle = "#fff";
-    ctx.font = "600 11px Inter, sans-serif";
-    const prize = CONFIG.prizes[i];
-    ctx.fillText(prize.icon, r * 0.6, -4);
-    ctx.font = "600 9px Inter, sans-serif";
-    ctx.fillText(prize.name, r * 0.6, 10);
-    ctx.restore();
+    // Label — rotated along the radius, text reads outward
+    const lbl = document.createElement("div");
+    lbl.className = "wh-label";
+    lbl.style.transform = `rotate(${i * arc + arc / 2}deg)`;
+    lbl.innerHTML =
+      `<span class="wh-icon">${CONFIG.prizes[i].icon}</span>` +
+      `<span class="wh-name">${CONFIG.prizes[i].name}</span>`;
+    disc.appendChild(lbl);
   }
 }
 
 function spinWheel(winIndex) {
   if (winIndex === undefined) return;
   state.isSpinning = true;
-  const segments = CONFIG.prizes.length;
-  const arc = 360 / segments;
-  const targetAngle = 360 - (winIndex * arc + arc / 2);
-  const totalSpin = 360 * 5 + targetAngle;
 
-  const canvas = document.getElementById("wheelCanvas");
-  const ctx = canvas.getContext("2d");
-  const cx = 140,
-    cy = 140,
-    r = 130;
-  const segArc = (2 * Math.PI) / segments;
-  let startTime = null;
-  const duration = 4000;
+  const disc = document.getElementById("wheelDisc");
+  const n = CONFIG.prizes.length;
+  const arc = 360 / n;
 
-  function easeOut(t) {
-    return 1 - Math.pow(1 - t, 3);
-  }
+  // Winning segment centre should stop at the pointer (top)
+  const target = -(winIndex * arc + arc / 2);
+  const spins = 360 * 5 + ((target % 360) + 360) % 360;
+  wheelAngle += spins;
 
-  function animate(ts) {
-    if (!startTime) startTime = ts;
-    const elapsed = ts - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    const easedProgress = easeOut(progress);
-    const currentAngle = easedProgress * totalSpin;
+  disc.classList.add("spinning");
+  disc.style.transform = `rotate(${wheelAngle}deg)`;
 
-    ctx.clearRect(0, 0, 280, 280);
-    ctx.save();
-    ctx.translate(cx, cy);
-    ctx.rotate((currentAngle * Math.PI) / 180);
-    ctx.translate(-cx, -cy);
-
-    for (let i = 0; i < segments; i++) {
-      const startA = i * segArc - Math.PI / 2;
-      const endA = startA + segArc;
-      ctx.beginPath();
-      ctx.moveTo(cx, cy);
-      ctx.arc(cx, cy, r, startA, endA);
-      ctx.closePath();
-      ctx.fillStyle = i % 2 === 0 ? "#22c55e" : "#16a34a";
-      ctx.fill();
-      ctx.strokeStyle = "rgba(255,255,255,.2)";
-      ctx.lineWidth = 1;
-      ctx.stroke();
-
-      ctx.save();
-      ctx.translate(cx, cy);
-      ctx.rotate(startA + segArc / 2);
-      ctx.textAlign = "center";
-      ctx.fillStyle = "#fff";
-      ctx.font = "600 11px Inter, sans-serif";
-      ctx.fillText(CONFIG.prizes[i].icon, r * 0.6, -4);
-      ctx.font = "600 9px Inter, sans-serif";
-      ctx.fillText(CONFIG.prizes[i].name, r * 0.6, 10);
-      ctx.restore();
-    }
-    ctx.restore();
-
-    if (progress < 1) {
-      requestAnimationFrame(animate);
-    } else {
-      setTimeout(() => onWin(CONFIG.prizes[winIndex]), 400);
-    }
-  }
-
-  requestAnimationFrame(animate);
+  const onEnd = () => {
+    disc.removeEventListener("transitionend", onEnd);
+    setTimeout(() => onWin(CONFIG.prizes[winIndex]), 300);
+  };
+  disc.addEventListener("transitionend", onEnd);
 }
 
 // ==========================================
