@@ -17,7 +17,7 @@ function renderDaily() {
 
     const label = document.createElement("span");
     label.className = "daily-label";
-    label.textContent = DAY_LABELS[i] || (i + 1);
+    label.textContent = DAY_LABELS[i] || i + 1;
 
     const icon = document.createElement("span");
     icon.className = "daily-icon";
@@ -31,7 +31,8 @@ function renderDaily() {
     cell.appendChild(icon);
     container.appendChild(cell);
   }
-  document.getElementById("daily-checked-count").textContent = state.dailyChecks.length;
+  document.getElementById("daily-checked-count").textContent =
+    state.dailyChecks.length;
   document.getElementById("daily-total-count").textContent = CONFIG.dailyDays;
 
   const btn = document.getElementById("daily-btn");
@@ -57,7 +58,8 @@ function dailyCheckIn() {
   document.getElementById("ticket-count").textContent = state.tickets;
   document.getElementById("modal-icon").textContent = "🎟";
   document.getElementById("modal-title").textContent = "Бонус!";
-  document.getElementById("modal-text").textContent = "Ежедневная отметка: +1 билетик";
+  document.getElementById("modal-text").textContent =
+    "Ежедневная отметка: +1 билетик";
   document.getElementById("modal").classList.add("active");
   updatePlayButton();
 
