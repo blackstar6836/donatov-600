@@ -1,0 +1,32 @@
+/* ═══════════════════════════════════════════
+   STATS BLOCK (Ended mode)
+   ═══════════════════════════════════════════ */
+.stats-block {
+  padding: 24px;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+.stats-block h3 {
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+.stats-nums {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.stat-item {
+  text-align: center;
+}
+.stat-item .stat-val {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary);
+}
+.stat-item .stat-label {
+  font-size: 13px;
+  color: var(--muted);
+}

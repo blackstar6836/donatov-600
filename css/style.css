@@ -1,0 +1,30 @@
+/* ═══════════════════════════════════════════
+   STYLE.CSS — главный файл стилей
+   Порядок слоёв: base → components
+   ═══════════════════════════════════════════ */
+
+@layer base, components;
+
+/* ── Base ─────────────────────────────────── */
+@import url("base/fonts.css") layer(base);
+@import url("base/tokens.css") layer(base);
+@import url("base/reset.css") layer(base);
+
+/* ── Components ───────────────────────────── */
+@import url("components/utilities.css") layer(components);
+@import url("components/header.css") layer(components);
+@import url("components/hero.css") layer(components);
+@import url("components/steps.css") layer(components);
+@import url("components/interactive.css") layer(components);
+@import url("components/wheel.css") layer(components);
+@import url("components/roulette.css") layer(components);
+@import url("components/cards.css") layer(components);
+@import url("components/tasks.css") layer(components);
+@import url("components/daily.css") layer(components);
+@import url("components/prizes.css") layer(components);
+@import url("components/feed.css") layer(components);
+@import url("components/accordion.css") layer(components);
+@import url("components/stats.css") layer(components);
+@import url("components/footer.css") layer(components);
+@import url("components/modal.css") layer(components);
+@import url("components/states.css") layer(components);

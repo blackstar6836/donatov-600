@@ -1,0 +1,66 @@
+/* ═══════════════════════════════════════════
+   MY PRIZES
+   ═══════════════════════════════════════════ */
+.prizes-section {
+  padding: 48px 0;
+}
+.prizes-card {
+  padding: 24px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.prizes-card h3 {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+.prizes-card > p.sub {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+.prize-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.prize-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.prize-row-icon {
+  font-size: 22px;
+}
+.prize-row-info {
+  flex: 1;
+}
+.prize-row-info h4 {
+  font-size: 14px;
+  font-weight: 600;
+}
+.prize-row-info p {
+  font-size: 12px;
+  color: var(--muted);
+}
+.prize-row-count {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: var(--danger);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+}
+.prizes-note {
+  margin-top: 14px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--muted);
+  font-size: 13px;
+}

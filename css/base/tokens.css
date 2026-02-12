@@ -1,0 +1,43 @@
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS
+   ═══════════════════════════════════════════ */
+:root {
+  --font-headings: "Montserrat", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --radius: 12px;
+  --transition: 0.25s ease;
+}
+
+[data-theme="light"] {
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --text: #1a1a1a;
+  --muted: #6b7280;
+  --primary: #22c55e;
+  --primary-hover: #16a34a;
+  --secondary: #3b82f6;
+  --border: #e5e7eb;
+  --success: #22c55e;
+  --danger: #ef4444;
+  --surface-alt: #f0fdf4;
+  --card-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --card-shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+  --bg: #0f1117;
+  --surface: #1a1d27;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --primary: #22c55e;
+  --primary-hover: #16a34a;
+  --secondary: #60a5fa;
+  --border: #2d3140;
+  --success: #22c55e;
+  --danger: #ef4444;
+  --surface-alt: #162217;
+  --card-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --card-shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.4);
+}

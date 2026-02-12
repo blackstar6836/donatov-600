@@ -1,0 +1,62 @@
+/* ═══════════════════════════════════════════
+   LIVE FEED
+   ═══════════════════════════════════════════ */
+.feed-section {
+  padding: 48px 0;
+}
+.feed-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.feed-header h2 {
+  margin-bottom: 0;
+}
+.feed-header .feed-count {
+  color: var(--muted);
+  font-size: 13px;
+}
+.feed-card {
+  padding: 0;
+  overflow: hidden;
+}
+.feed-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+.feed-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  animation: feedSlideIn 0.4s ease;
+}
+.feed-item:last-child {
+  border-bottom: none;
+}
+.feed-item .feed-user {
+  font-weight: 600;
+  min-width: 80px;
+}
+.feed-item .feed-text {
+  color: var(--muted);
+}
+.feed-item .feed-prize {
+  font-weight: 600;
+  color: var(--primary);
+  margin-left: auto;
+  white-space: nowrap;
+}
+@keyframes feedSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

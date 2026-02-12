@@ -1,0 +1,99 @@
+/* ═══════════════════════════════════════════
+   INTERACTIVE SECTION
+   ═══════════════════════════════════════════ */
+.interactive-section {
+  padding: 48px 0;
+}
+.interactive-layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .interactive-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tab buttons */
+.tab-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.tab-btn {
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font-body);
+  transition: all var(--transition);
+}
+.tab-btn.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+.tab-btn:hover:not(.active) {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* Interactive panel */
+.interact-panel {
+  padding: 24px;
+}
+
+/* Prize grid inside interactive */
+.prize-grid {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.prize-item {
+  flex: 1;
+  min-width: 100px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  text-align: center;
+  background: var(--bg);
+  transition: all var(--transition);
+}
+.prize-item:hover {
+  border-color: var(--primary);
+}
+.prize-icon {
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+.prize-name {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.prize-qty {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* Interactive controls */
+.interact-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.interact-controls .ticket-cost {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--muted);
+}

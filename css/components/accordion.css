@@ -1,0 +1,72 @@
+/* ═══════════════════════════════════════════
+   ALL PRIZES ACCORDION
+   ═══════════════════════════════════════════ */
+.accordion-section {
+  padding: 48px 0;
+}
+.accordion {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.accordion-item {
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+.accordion-item .card {
+  overflow: hidden;
+}
+.accordion-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-headings);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+.accordion-btn svg {
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+.accordion-item.open .accordion-btn svg {
+  transform: rotate(180deg);
+}
+.accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.accordion-item.open .accordion-body {
+  max-height: 600px;
+}
+.accordion-body-inner {
+  padding: 0 20px 16px;
+}
+.acc-prize-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+.acc-prize-row:last-child {
+  border-bottom: none;
+}
+.acc-prize-row .ap-icon {
+  font-size: 20px;
+}
+.acc-prize-row .ap-name {
+  flex: 1;
+  font-weight: 500;
+}
+.acc-prize-row .ap-qty {
+  color: var(--muted);
+  font-size: 13px;
+}
