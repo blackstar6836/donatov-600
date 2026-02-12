@@ -110,7 +110,7 @@ function spinWheel(winIndex) {
 
   // Winning segment centre should stop at the pointer (top)
   const target = -(winIndex * arc + arc / 2);
-  const spins = 360 * 5 + ((target % 360) + 360) % 360;
+  const spins = 360 * 5 + (((target % 360) + 360) % 360);
   wheelAngle += spins;
 
   disc.classList.add("spinning");
