@@ -33,9 +33,10 @@ function addFeedItem() {
   const div = document.createElement("div");
   div.className = "feed-item";
   div.innerHTML = `
+    <span class="feed-prize">${item.icon}</span>
     <span class="feed-user">${item.name}</span>
     <span class="feed-text">выиграл(а)</span>
-    <span class="feed-prize">${item.icon} ${item.prize}</span>`;
+    <span class="feed-prize">${item.prize}</span>`;
   list.prepend(div);
   while (list.children.length > 30) list.removeChild(list.lastChild);
   document.getElementById("feed-total").textContent =
@@ -45,7 +46,7 @@ function addFeedItem() {
 let feedInterval;
 function startFeed() {
   for (let i = 0; i < 8; i++) addFeedItem();
-  feedInterval = setInterval(addFeedItem, 3000);
+  feedInterval = setInterval(addFeedItem, 900);
 }
 function stopFeed() {
   clearInterval(feedInterval);
